@@ -1,0 +1,281 @@
+/*
+ *= require_tree .
+ *= require_self
+ */
+
+/* ==========================================================================
+   1. 全体・共通スタイル
+   ========================================================================== */
+body {
+  background-color: #ffffff;
+  color: #1a1a1a;
+  margin: 0;
+  font-family: sans-serif;
+}
+
+/* ヘッダー */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #7ca4b9; /* くすみブルー */
+  padding: 15px 30px;
+}
+
+.logo a {
+  text-decoration: none;
+  color: #1a1a1a;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+/* ヘッダー右側のパーツをまとめる箱 */
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.header-right form {
+  margin: 0;
+  display: inline-block;
+}
+
+/* ログアウトボタン */
+.header-right input[type="submit"],
+.btn-logout {
+  background: #c94c4c; /* くすみ赤 */
+  border: none;
+  color: white !important;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s;
+  text-decoration: none;
+}
+.header-right input[type="submit"]:hover,
+.btn-logout:hover {
+  background: #b03f3f;
+}
+
+.header-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid white;
+}
+
+/* ヘッダーの画像がないときの丸枠 */
+.header-icon-placeholder {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+.header-icon-link {
+  text-decoration: none;
+}
+
+/* ==========================================================================
+   2. 投稿一覧 ＆ マイページ 共通レイアウト
+   ========================================================================== */
+.tweets-container,
+.user-show-container {
+  max-width: 700px;
+  margin: 30px auto;
+  padding: 20px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.section-title {
+  font-size: 20px;
+  color: #1a1a1a;
+  margin: 20px 0 0 0;
+  padding-bottom: 8px;
+  border-bottom: 2px solid #7ca4b9;
+}
+
+/* ==========================================================================
+   3. カードデザイン
+   ========================================================================== */
+.tweet-card,
+.profile-card,
+.user-tweet-card {
+  background: #f5f7f8;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+  transition: 0.2s;
+  box-sizing: border-box;
+}
+
+.tweet-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+}
+
+/* ユーザー情報エリア */
+.tweet-user-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.tweet-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.tweet-icon-placeholder {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #e5e9ec;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  color: #7ca4b9;
+}
+
+.tweet-user {
+  font-weight: bold;
+  font-size: 15px;
+  color: #1a1a1a;
+}
+
+.tweet-date {
+  font-size: 12px;
+  color: #777777;
+  margin-top: 2px;
+}
+
+.tweet-body {
+  font-size: 16px;
+  line-height: 1.6;
+  color: #1a1a1a;
+  margin-bottom: 16px;
+  white-space: pre-wrap;
+}
+
+/* ==========================================================================
+   4. アクションボタン（編集・削除）
+   ========================================================================== */
+.tweet-actions { display: flex; gap: 10px; margin-bottom: 12px; }
+.tweet-actions form { display: inline; margin: 0; }
+
+.btn-edit, .btn-small-edit, .btn-edit-profile,
+.tweet-actions input[type="submit"], .tweet-actions button, .btn-delete, .btn-back {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 38px;
+  padding: 0 16px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: bold;
+  text-decoration: none;
+  color: white !important;
+  border: none;
+  cursor: pointer;
+  box-sizing: border-box;
+  transition: 0.2s;
+}
+
+.btn-edit, .btn-small-edit, .btn-edit-profile, .btn-back { background: #1d3557; }
+.btn-edit:hover, .btn-small-edit:hover, .btn-edit-profile:hover, .btn-back:hover { background: #14243b; }
+
+.btn-delete, .tweet-actions input[type="submit"], .tweet-actions button { background: #c94c4c; }
+.btn-delete:hover, .tweet-actions input[type="submit"]:hover, .tweet-actions button:hover { background: #b03f3f; }
+
+/* ==========================================================================
+   5. いいねエリア（ハートデザインに特化）
+   ========================================================================== */
+.tweet-like {
+  border-top: 1px solid #e0e0e0;
+  padding-top: 12px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.like-btn {
+  text-decoration: none;
+  font-size: 22px;             /* ハートの大きさ */
+  line-height: 1;
+  color: #c94c4c !important;   /* いつものくすみ赤 */
+  transition: transform 0.1s ease;
+  user-select: none;
+}
+
+.like-btn:active {
+  transform: scale(1.2);       /* ポチッと押した時に少し弾む */
+}
+
+.like-count {
+  color: #555555;
+  font-size: 15px;
+  font-weight: bold;
+  margin-left: 2px;
+}
+
+/* マイページのアコーディオン用 */
+.user-tweet-card { padding: 0; overflow: hidden; }
+.user-tweet-summary { padding: 16px 20px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; outline: none; list-style: none; }
+.user-tweet-summary::-webkit-details-marker { display: none; }
+.tweet-text-preview { font-size: 15px; color: #1a1a1a; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 70%; }
+.tweet-text-full { padding: 0 20px 16px 20px; font-size: 15px; color: #333333; line-height: 1.6; border-top: 1px dashed #e0e0e0; margin-top: 4px; padding-top: 12px; }
+
+/* ==========================================================================
+   6. 右下固定：新規投稿（鉛筆ボタン）
+   ========================================================================== */
+.floating-tweet-btn {
+  position: fixed;
+  right: 30px;
+  bottom: 30px;
+  z-index: 9999;
+  
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: #1d3557;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+  
+  font-size: 0 !important;
+  color: transparent !important;
+  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.2s, background-color 0.2s;
+}
+
+.floating-tweet-btn::before {
+  content: "✎";
+  font-size: 26px;
+  color: #ffffff !important;
+  display: block; 
+}
+
+.floating-tweet-btn:hover {
+  background: #14243b;
+  transform: scale(1.1);
+}

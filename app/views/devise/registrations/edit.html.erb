@@ -1,0 +1,62 @@
+<div style="font-family: 'Helvetica Neue', Arial, sans-serif; max-width: 600px; margin: 40px auto; padding: 0 20px; box-sizing: border-box;">
+  
+  <h2 style="font-size: 22px; color: #1d3557; margin: 0 0 25px 0; padding-bottom: 10px; border-bottom: 2px solid #7ca4b9; font-weight: bold; text-align: left;">
+    アカウント設定の編集
+  </h2>
+
+  <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 30px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); box-sizing: border-box;">
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, multipart: true }) do |f| %>
+      <%= render "devise/shared/error_messages", resource: resource %>
+
+      <div style="margin-bottom: 20px; text-align: left;">
+        <%= f.label :name, "名前", style: "display: block; font-weight: bold; margin-bottom: 8px; font-size: 14px; color: #333;" %>
+        <%= f.text_field :name, autofocus: true, style: "width: 100%; padding: 10px 12px; border: 1px solid #cbd5e1; border-radius: 6px; box-sizing: border-box; font-size: 14px; background: #f8fafc;" %>
+      </div>
+
+      <div style="margin-bottom: 20px; text-align: left;">
+        <%= f.label :image, "プロフィール画像", style: "display: block; font-weight: bold; margin-bottom: 8px; font-size: 14px; color: #333;" %>
+        <%= f.file_field :image, style: "font-size: 14px; color: #475569;" %>
+      </div>
+
+      <div style="margin-bottom: 20px; text-align: left;">
+        <%= f.label :profile, "プロフィール", style: "display: block; font-weight: bold; margin-bottom: 8px; font-size: 14px; color: #333;" %>
+        <%= f.text_area :profile, rows: 4, style: "width: 100%; padding: 10px 12px; border: 1px solid #cbd5e1; border-radius: 6px; box-sizing: border-box; resize: vertical; font-size: 14px; background: #f8fafc;" %>
+      </div>
+
+      <div style="margin-bottom: 20px; text-align: left;">
+        <%= f.label :email, "メールアドレス", style: "display: block; font-weight: bold; margin-bottom: 8px; font-size: 14px; color: #333;" %>
+        <%= f.email_field :email, autocomplete: "email", style: "width: 100%; padding: 10px 12px; border: 1px solid #cbd5e1; border-radius: 6px; box-sizing: border-box; font-size: 14px; background: #f8fafc;" %>
+      </div>
+
+      <div style="margin-bottom: 20px; border-top: 1px dashed #e2e8f0; padding-top: 20px; text-align: left;">
+        <%= f.label :password, "新しいパスワード", style: "display: block; font-weight: bold; margin-bottom: 4px; font-size: 14px; color: #333;" %>
+        <span style="font-size: 12px; color: #64748b; display: block; margin-bottom: 8px;">（※変更しない場合は空欄のままにしてください）</span>
+        <%= f.password_field :password, autocomplete: "new-password", style: "width: 100%; padding: 10px 12px; border: 1px solid #cbd5e1; border-radius: 6px; box-sizing: border-box; font-size: 14px; background: #f8fafc;" %>
+        <% if @minimum_password_length %>
+          <span style="font-size: 12px; color: #64748b; display: block; margin-top: 4px;"><%= @minimum_password_length %> 文字以上必要です</span>
+        <% end %>
+      </div>
+
+      <div style="margin-bottom: 25px; text-align: left;">
+        <%= f.label :password_confirmation, "新しいパスワード（確認用）", style: "display: block; font-weight: bold; margin-bottom: 8px; font-size: 14px; color: #333;" %>
+        <%= f.password_field :password_confirmation, autocomplete: "new-password", style: "width: 100%; padding: 10px 12px; border: 1px solid #cbd5e1; border-radius: 6px; box-sizing: border-box; font-size: 14px; background: #f8fafc;" %>
+      </div>
+
+      <div style="margin-bottom: 30px; background: #fff1f2; padding: 15px; border-radius: 8px; border: 1px solid #fecdd3; text-align: left;">
+        <%= f.label :current_password, "現在のパスワード", style: "display: block; font-weight: bold; margin-bottom: 4px; font-size: 14px; color: #e11d48;" %>
+        <span style="font-size: 12px; color: #e11d48; display: block; margin-bottom: 8px;">（※更新するには現在のパスワードの入力が必要です）</span>
+        <%= f.password_field :current_password, autocomplete: "current-password", style: "width: 100%; padding: 10px 12px; border: 1px solid #fecdd3; border-radius: 6px; box-sizing: border-box; font-size: 14px; background: #ffffff;" %>
+      </div>
+
+      <div style="text-align: center;">
+        <%= f.submit "変更を保存する", style: "width: 100%; height: 48px; font-size: 15px; background: #1d3557; color: white; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; box-shadow: 0 2px 4px rgba(0,0,0,0.1); -webkit-appearance: none;" %>
+      </div>
+    <% end %>
+  </div>
+
+  <div style="margin-top: 25px; display: flex; justify-content: center; gap: 15px;">
+    <%= link_to "マイページに戻る", user_path(current_user.id), style: "background: #7ca4b9; color: white; text-decoration: none; padding: 12px; border-radius: 8px; font-weight: bold; flex: 1; font-size: 14px; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.05);" %>
+    <%= link_to "投稿一覧に戻る", tweets_path, style: "background: #475569; color: white; text-decoration: none; padding: 12px; border-radius: 8px; font-weight: bold; flex: 1; font-size: 14px; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.05);" %>
+  </div>
+
+</div>

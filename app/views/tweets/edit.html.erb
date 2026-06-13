@@ -1,0 +1,14 @@
+<%= form_for @tweet do |f| %>
+
+  <%= f.label :time %>
+  <%= f.time_select :time %>
+
+  <%= f.label :progress %>
+  <%= f.text_field :progress %>
+
+  <%= f.label :question %>
+  <%= f.text_field :question %>
+
+  <%= f.submit "編集する" %>
+
+<% end %>

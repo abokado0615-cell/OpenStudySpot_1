@@ -1,0 +1,82 @@
+<div style="font-family: 'Helvetica Neue', Arial, sans-serif; max-width: 600px; margin: 40px auto; padding: 0 20px; box-sizing: border-box;">
+  
+  <h2 style="font-size: 22px; color: #1d3557; margin: 0 0 5px 0; font-weight: bold; text-align: left;">
+    OPEN STUDY SPOT
+  </h2>
+  <p style="font-size: 14px; color: #7ca4b9; margin: 0 0 25px 0; font-weight: bold; text-align: left;">
+    〜 今日の勉強をログに残して共有しよう 〜
+  </p>
+
+  <div style="position: relative; background: #fffdf6; border: 2px solid #f3ebd4; border-radius: 12px 12px 0 12px; padding: 30px; box-shadow: -4px 4px 12px rgba(0,0,0,0.03); box-sizing: border-box; overflow: hidden;">
+    
+    <div style="position: absolute; bottom: 0; right: 0; width: 0; height: 0; border-style: solid; border-width: 0 0 20px 20px; border-color: transparent transparent #ffffff #ded3b7; box-shadow: -2px -2px 4px rgba(0,0,0,0.06);"></div>
+
+    <%= form_for(@tweet) do |f| %>
+      
+      <% if @tweet.errors.any? %>
+        <div style="background: #fef2f2; border: 1px solid #fee2e2; border-radius: 8px; padding: 15px; margin-bottom: 25px; text-align: left;">
+          <% @tweet.errors.full_messages.each do |message| %>
+            <p style="color: #ef4444; font-size: 13px; margin: 0; font-weight: bold;">⚠️ <%= message %></p>
+          <% end %>
+        </div>
+      <% end %>
+      
+      <div style="margin-bottom: 25px; text-align: left;">
+        <%= f.label :time, "⏰ 勉強時間（任意）", style: "display: block; font-weight: bold; margin-bottom: 10px; font-size: 14px; color: #1d3557;" %>
+        <div style="display: flex; align-items: center; gap: 8px; background: #ffffff; padding: 10px 15px; border-radius: 8px; border: 1px solid #e2d9bf;">
+          <%= f.time_select :time, { minute_step: 5, include_blank: true } %>
+        </div>
+      </div>
+
+      <div style="margin-bottom: 25px; text-align: left;">
+        <%= f.label :progress, "📝 今回の進捗・やったこと（任意）", style: "display: block; font-weight: bold; margin-bottom: 8px; font-size: 14px; color: #1d3557;" %>
+        <%= f.text_field :progress, placeholder: "例: 数学のワーク P.10〜15", style: "width: 100%; padding: 12px; border: 1px solid #e2d9bf; border-radius: 8px; box-sizing: border-box; font-size: 14px; background: #ffffff;" %>
+      </div>
+
+      <div style="margin-bottom: 25px; text-align: left;">
+        <%= f.label :question, "❓ 疑問点・つまずいたところなど（任意）", style: "display: block; font-weight: bold; margin-bottom: 8px; font-size: 14px; color: #1d3557;" %>
+        <%= f.text_area :question, rows: 2, placeholder: "みんなに聞きたいことや、難しかった部分をメモしてみよう", style: "width: 100%; padding: 12px; border: 1px solid #e2d9bf; border-radius: 8px; box-sizing: border-box; resize: vertical; font-size: 14px; background: #ffffff;" %>
+      </div>
+
+      <div style="margin-bottom: 35px; text-align: left;">
+        <%= f.label :body, "💬 ひとこと・つぶやき（任意）", style: "display: block; font-weight: bold; margin-bottom: 8px; font-size: 14px; color: #1d3557;" %>
+        <%= f.text_area :body, rows: 3, placeholder: "「がんばるぞー！」「お腹すいた…」など、なんでも自由に共有してみよう！", style: "width: 100%; padding: 12px; border: 1px solid #e2d9bf; border-radius: 8px; box-sizing: border-box; resize: vertical; font-size: 14px; background: #ffffff;" %>
+      </div>
+
+      <div style="text-align: center;">
+        <%= f.submit "STUDY LOGを共有する ✨", style: "width: 100%; height: 50px; font-size: 15px; background: #1d3557; color: white; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; box-shadow: 0 4px 6px rgba(29, 53, 87, 0.2);" %>
+      </div>
+
+      <div class="field">
+       <%= label_tag :tag_list, "タグ (カンマ区切りで自由に入力)" %>
+       <%= text_field_tag :tag_list, "", placeholder: "例: 数学, 勉強垢, ワーク" %>
+      </div>
+
+      <div style="margin-top: 20px; text-align: left; background: #f8f9fa; padding: 20px; border-radius: 8px;">
+       <p style="font-weight: bold; margin-bottom: 10px; font-size: 14px; color: #1d3557;">🏷️ タグを選択</p>
+  
+       <div style="display: flex; flex-wrap: wrap; gap: 10px;">
+         <%= f.collection_check_boxes(:tag_ids, Tag.all, :id, :name) do |tag| %>
+           <div style="background: #ffffff; padding: 5px 10px; border: 1px solid #e2d9bf; border-radius: 20px; font-size: 13px;">
+             <%= tag.label do %>
+               <%= tag.check_box %>
+               <%= tag.text %>
+             <% end %>
+           </div>
+         <% end %>
+       </div>
+</div>
+
+    <% end %>
+  </div>
+
+  <div style="margin-top: 25px; text-align: center;">
+    <%= link_to "← みんなのログ一覧に戻る", tweets_path, style: "color: #475569; text-decoration: none; font-weight: bold; font-size: 14px;" %>
+  </div>
+
+  <div style="margin-top: 20px; text-align: left; background: #f8f9fa; padding: 20px; border-radius: 8px;">
+  <p style="font-weight: bold; margin-bottom: 10px; font-size: 14px; color: #1d3557;">🏷️ タグを選択</p>
+  
+</div>
+  
+</div>

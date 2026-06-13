@@ -1,0 +1,5 @@
+<% @tweets.each do |t| %>
+  <% if t.user.image.attached? %>
+     <%= image_tag  t.user.image, size: '250x200'%>
+  <% end %>
+<% end %>

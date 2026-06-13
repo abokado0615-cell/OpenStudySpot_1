@@ -1,0 +1,67 @@
+<div class="user-show-container">
+  
+  <div class="profile-card">
+    <div class="profile-item"><strong>名前：</strong>あ</div>
+    <div class="profile-item"><strong>メールアドレス：</strong><%= @user.email %></div>
+    <div class="profile-item"><strong>プロフィール：</strong></div>
+    
+    <% if current_user == @user %>
+      <%= link_to "編集する", edit_user_path(@user.id), class: "btn-edit-profile" %>
+    <% end %>
+  </div>
+
+  <h2 class="section-title">ユーザーの投稿一覧</h2>
+  <div class="user-tweets-list">
+    <% if @user.respond_to?(:tweets) && @user.tweets.present? %>
+      <% @user.tweets.each do |t| %>
+        <details class="user-tweet-card">
+          <summary class="user-tweet-summary">
+            <span class="tweet-text-preview"><%= t.body if t.respond_to?(:body) || t.content if t.respond_to?(:content) || t.text if t.respond_to?(:text) %></span>
+            <%= link_to "編集する", edit_tweet_path(t.id), class: "btn-small-edit" %>
+          </summary>
+          <div class="tweet-text-full">
+            <%= t.body if t.respond_to?(:body) || t.content if t.respond_to?(:content) || t.text if t.respond_to?(:text) %>
+          </div>
+        </details>
+      <% end %>
+    <% else %>
+      <details class="user-tweet-card">
+        <summary class="user-tweet-summary">
+          <span class="tweet-text-preview">あ</span>
+          <%= link_to "編集する", "#", class: "btn-small-edit" %>
+        </summary>
+        <div class="tweet-text-full">あ</div>
+      </details>
+
+      <details class="user-tweet-card">
+        <summary class="user-tweet-summary">
+          <span class="tweet-text-preview">ああ（文字が多くなるとここに三点リーダーが表示されて縮みます...）</span>
+          <%= link_to "編集する", "#", class: "btn-small-edit" %>
+        </summary>
+        <div class="tweet-text-full">
+          ああ<br>
+          このように、文字が多くなったら普段はきゅっと1行に縮まり、クリックした時だけ縦にパッと広がって全文が見えるようになります。
+        </div>
+      </details>
+    <% end %>
+  </div>
+
+  <h2 class="section-title">ユーザーがいいねした投稿一覧</h2>
+  <div class="user-tweets-list">
+    <details class="user-tweet-card">
+      <summary class="user-tweet-summary">
+        <span class="tweet-text-preview">あ</span>
+      </summary>
+      <div class="tweet-text-full">あ</div>
+    </details>
+  </div>
+
+  <div class="back-actions">
+    <%= link_to "Tweet一覧に戻る", tweets_path, class: "btn-back" %>
+  </div>
+
+  <%@tweet.tag.each do|tag|%>
+    <span><%=tag.name%></span>
+  <%end%>
+
+</div>

@@ -1,0 +1,58 @@
+<div style="font-family: 'Helvetica Neue', Arial, sans-serif; max-width: 500px; margin: 40px auto; padding: 0 20px; text-align: center; box-sizing: border-box;">
+  
+  <h2 style="font-size: 22px; color: #1d3557; margin-bottom: 20px; font-weight: bold;">
+    マイページ 🏠
+  </h2>
+
+  <div style="background: #fffdf6; border: 2px solid #f3ebd4; border-radius: 12px; padding: 30px; box-shadow: -4px 4px 12px rgba(0,0,0,0.02); margin-bottom: 40px; display: flex; flex-direction: column; align-items: center; gap: 15px;">
+    
+    <% if @user.respond_to?(:image) && @user.image.attached? %>
+      <%= image_tag @user.image, style: "width: 80px; height: 80px; border-radius: 50%; object-fit: cover; border: 3px solid #7ca4b9;" %>
+    <% else %>
+      <div style="width: 80px; height: 80px; border-radius: 50%; background: #e5e9ec; color: #7ca4b9; display: flex; align-items: center; justify-content: center; font-size: 32px; border: 3px solid #7ca4b9;">👤</div>
+    <% end %>
+
+    <div>
+      <div style="font-size: 20px; font-weight: bold; color: #1d3557;"><%= @user.name.present? ? @user.name : "ユーザー名未設定" %></div>
+      <div style="font-size: 13px; color: #94a3b8;"><%= @user.email %></div>
+    </div>
+
+    <% if @user.respond_to?(:profile) && @user.profile.present? %>
+      <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 8px; padding: 15px; font-size: 14px; color: #475569; width: 100%; box-sizing: border-box;">
+        <%= @user.profile %>
+      </div>
+    <% end %>
+
+    <%= link_to "プロフィールを編集する", edit_user_registration_path, style: "display: block; background: #1d3557; color: white; padding: 10px 20px; border-radius: 6px; text-decoration: none; font-size: 13px; font-weight: bold;" %>
+  </div>
+
+  <h2 style="font-size: 18px; color: #1d3557; margin-bottom: 20px; font-weight: bold;">ユーザーの投稿一覧</h2>
+  
+  <% if @user.tweets.present? %>
+    <% @user.tweets.each do |t| %>
+      <div style="background: #fff; border: 1px solid #e2e8f0; border-radius: 8px; padding: 15px; margin-bottom: 15px; text-align: center;">
+        <div style="font-size: 14px; color: #334155; margin-bottom: 10px;"><%= t.progress %></div>
+        <%= link_to "編集する", edit_tweet_path(t.id), style: "font-size: 12px; color: #7ca4b9;" %>
+      </div>
+    <% end %>
+  <% else %>
+    <p style="color: #94a3b8; font-size: 14px;">まだ投稿がありません</p>
+  <% end %>
+
+  <h2 style="font-size: 18px; color: #1d3557; margin: 30px 0 20px 0; font-weight: bold;">いいねした投稿一覧</h2>
+  
+  <% if @user.respond_to?(:liked_tweets) && @user.liked_tweets.present? %>
+    <% @user.liked_tweets.each do |t| %>
+      <div style="background: #fff; border: 1px solid #e2e8f0; border-radius: 8px; padding: 15px; margin-bottom: 15px; text-align: center;">
+        <div style="font-size: 13px; color: #475569;"><%= t.progress %></div>
+      </div>
+    <% end %>
+  <% else %>
+    <p style="color: #94a3b8; font-size: 14px;">いいねした投稿がありません</p>
+  <% end %>
+
+  <div style="margin-top: 40px;">
+    <%= link_to "➔ LOG一覧に戻る", root_path, style: "color: #7ca4b9; text-decoration: none; font-weight: bold; font-size: 14px;" %>
+  </div>
+
+</div>
