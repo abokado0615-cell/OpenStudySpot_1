@@ -9,10 +9,10 @@
       
       <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 15px;">
         <%= link_to user_path(tweet.user), style: "text-decoration: none; color: inherit; display: block;" do %>
-          <% if current_user.already_liked?(tweet) %>
-           <%= button_to "❤️", tweet_like_path(tweet_id: tweet.id, id: tweet.id), method: :delete, data: { turbo: false } %>
+          <% if tweet.user.respond_to?(:image) && tweet.user.image.attached? %>
+            <%= image_tag tweet.user.image, style: "width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 1px solid #7ca4b9;" %>
           <% else %>
-            <%= button_to "♡", tweet_likes_path(tweet_id: tweet.id), method: :post, data: { turbo: false } %>
+            <div style="width: 40px; height: 40px; border-radius: 50%; background: #e5e9ec; color: #7ca4b9; display: flex; align-items: center; justify-content: center; font-size: 18px; border: 1px solid #7ca4b9;">👤</div>
           <% end %>
         <% end %>
 
@@ -51,9 +51,9 @@
           <% if tweet.respond_to?(:likes) %>
             <% if current_user.present? %>
               <% if current_user.already_liked?(tweet) %>
-               <%= button_to "❤️", tweet_like_path(tweet_id: tweet.id, id: tweet.id), method: :delete %>
+                <%= button_to "❤️", tweet_like_path(tweet_id: tweet.id, id: tweet.id), method: :delete, style: "background:none; border:none; cursor:pointer; padding:0;" %>
               <% else %>
-               <%= button_to "♡", tweet_likes_path(tweet_id: tweet.id), method: :post %>
+                <%= button_to "♡", tweet_likes_path(tweet_id: tweet.id), method: :post, style: "background:none; border:none; cursor:pointer; padding:0;" %>
               <% end %>
             <% else %>
               <span>♡</span>
