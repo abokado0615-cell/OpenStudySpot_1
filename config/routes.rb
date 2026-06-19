@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   end
 
   # 3. ユーザーマイページのルール
-  resources :users, only: [:show]
+  resources :users, only: [:show, :edit, :update]
 
   # 4. 投稿（tweets）関連のルール
   resources :tweets do

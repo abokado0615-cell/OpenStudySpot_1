@@ -8,6 +8,12 @@
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+    <div style="margin-top: 5px; display: flex; gap: 8px;">
+     <% @suggested_tags.each do |tag| %>
+       <%= link_to tag, tweets_path(tag: tag), style: "color: #e0f2fe; font-size: 12px; text-decoration: underline;" %>
+     <% end %>
+    </div>
   </head>
 
   <body>
