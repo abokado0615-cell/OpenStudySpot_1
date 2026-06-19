@@ -14,6 +14,14 @@
        <%= link_to tag, tweets_path(tag: tag), style: "color: #e0f2fe; font-size: 12px; text-decoration: underline;" %>
      <% end %>
     </div>
+
+    <div style="display: flex; gap: 10px; margin-top: 5px; justify-content: center;">
+     <% @suggested_tags.each_with_index do |tag, index| %>
+       <%= link_to tweets_path(tag: tag), style: "text-decoration: none; color: #333; font-size: 12px; background: #eee; padding: 2px 8px; border-radius: 10px;" do %>
+         <%= index + 1 %> <%= tag %>
+       <% end %>
+     <% end %>
+   </div>
   </head>
 
   <body>

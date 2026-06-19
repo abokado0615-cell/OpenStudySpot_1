@@ -3,7 +3,6 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
-  # 👇 これが丸ごと抜けていたため、保存ができませんでした！
   def update
     @user = User.find(params[:id])
     if @user.update(user_params)

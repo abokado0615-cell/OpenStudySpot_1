@@ -9,6 +9,6 @@
 #   end
 
 Tag.create([
-    {name:'タグ1'}
-    {name:'タグ2'}
+  {name: 'タグ1'},
+  {name: 'タグ2'} 
 ])
